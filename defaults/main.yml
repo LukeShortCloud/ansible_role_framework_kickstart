@@ -18,7 +18,6 @@ ks_networks:
 ks_firewall_enable: True
 ks_firewall: --service=ssh
 ks_packages:
-  - "@base"
   - "@core"
 ks_services_disabled: NetworkManager
 ks_services_enabled: network,sshd
