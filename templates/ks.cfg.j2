@@ -1,0 +1,59 @@
+# Operating system install
+install
+eula --agreed
+url --url {{ ks_url }}
+
+# Language
+lang {{ ks_lang }}
+keyboard {{ ks_keyboard }}
+
+# Time
+timezone {{ ks_timezone }}
+
+# Storage
+ignoredisk --only-use {{ ks_drive }}
+zerombr
+clearpart --all --drives {{ ks_drive }}
+bootloader --boot-drive {{ ks_drive }}
+{% if ks_autopart_enable %}
+autopart --type {{ ks_autopart_type }}
+{% else %}
+{% for partition in ks_partitions -%}
+{{ partition }}
+{% endfor %}
+{% endif %}
+
+# Security
+auth --enableshadow --passalgo=sha512
+rootpw {{ ks_rootpw }}
+{% if not ks_selinux_enable %}
+selinux --disabled
+{% endif %}
+
+# Network
+{% for network in ks_networks %}
+{{ network }}
+{% endfor %}
+
+# Firewall
+{% if ks_firewall_enable %}
+firewall {{ ks_firewall }}
+{% else %}
+firewall --disabled
+{% endif %}
+
+# Packages
+%packages
+{% for package in ks_packages %}
+{{ package }}
+{% endfor %}
+
+# Services
+{% if ks_services_disabled is defined %}
+services --disabled {{ ks_services_disabled }}
+{% endif %}
+{% if ks_services_enabled is defined %}
+services --enabled {{ ks_services_enabled }}
+{% endif %}
+
+reboot
