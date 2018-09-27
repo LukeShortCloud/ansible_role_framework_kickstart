@@ -47,6 +47,7 @@ firewall --disabled
 {% for package in ks_packages %}
 {{ package }}
 {% endfor %}
+%end
 
 # Services
 {% if ks_services_disabled is defined %}
