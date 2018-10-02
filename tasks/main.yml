@@ -2,4 +2,4 @@
 - name: Generate Kickstart file
   template:
     src: ks.cfg.j2
-    dest: "{{ playbook_dir }}/ks.cfg"
+    dest: "{{ framework_kickstart_tmp_dir }}/{{ framework_kickstart_file_name }}"

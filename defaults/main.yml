@@ -1,4 +1,9 @@
 ---
+# Role variables.
+framework_kickstart_tmp_dir: /tmp
+framework_kickstart_file_name: ks.cfg
+
+# Kickstart file variables.
 ks_url: http://mirrors.liquidweb.com/CentOS/7/os/x86_64
 ks_lang: en_US.UTF-8
 ks_keyboard: us
